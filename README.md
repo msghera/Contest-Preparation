@@ -1,19 +1,17 @@
 # ICPC Preparation Notebook
 
-***Prepared (Ongoing) by*** 
-***Mohammad Sheikh Ghazanfar***
-***Machine Learning R&D, Nascenia***
+*Prepared (Ongoing) by Mohammad Sheikh Ghazanfar, Machine Learning R&D, Nascenia*
 
 * [Dynamic Programming](#dp)
    * [Knapsack](#knapsack)
 * [Math](#math)
-      * [Counting](#counting)
-        - De-arrangement 
-        - Binomial Coeffecient
-        - Catalan Number
-      * [Number Therory](#number_theory)
-        - Primes (Sieve Method)
-        - Euler Totient
+  * [Couning](#counting)
+    - De-arrangement 
+    - Binomial Coefficient
+    - Catalan Number
+  - [Number Therory](#number_theory)
+      * Primes (Sieve Method)
+      * Euler Totient
 * [Data Structure](#ds)
    * [Segment Tree](#segment_tree)
    * [Binary Indexed Tree](#bit)
@@ -27,7 +25,7 @@ ____
 
 ## <b name="coding">Data Structures</b>
 
-#### <a name="segment">Segment Tree</a>
+#### <a name="segment_tree">Segment Tree</a>
 
 - Do point and range update in an array (adding k to each number between *l-r*  etc.) in *O(logn)*
 - Get range query (Sum of all numbers between *l-r*) in *O(logn)*
