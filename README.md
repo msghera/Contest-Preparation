@@ -13,7 +13,7 @@
     - Catalan Number
   - [Number Therory](#number_theory)
       * Primes (Sieve Method)
-      * Euler Totient
+      * [Euler Totient](#euler_totient)
   
 * [Data Structure](#ds)
    * [Segment Tree](#segment_tree)
@@ -184,6 +184,30 @@ struct UF{
         }
     }
 };
+```
+
+## <b name="number_theory">Number Theory</b>
+
+#### <a name="union_find">Euler Totient</a>
+
+- Also know as *phi* or *φ*.
+- *φ(n)* Denotes the number of integers less than n which are co-prime with that number. Such that, count number of *i* for *1 ≤i < n* and *gcd(i, n) = 1*.
+- Number of integer such that *gcd(i, n) = k* is equal to φ(n/k)
+
+```c++
+#define MAX_SIZE 10000002
+
+int phi[MAX_SIZE];
+
+void computeTotient(int n){
+    for (int i=1; i<=n; i++) phi[i] = i;
+    for (int p=2; p<=n; p++){
+        if (phi[p] == p){
+            phi[p] = p-1;
+            for (int i = 2*p; i<=n; i += p) phi[i] = (phi[i]/p) * (p-1);
+        }
+    }
+}
 ```
 
 
