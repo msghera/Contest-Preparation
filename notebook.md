@@ -8,7 +8,12 @@
    * [Knapsack](#knapsack)
 * [Math](#math)
       * [Counting](#counting)
+        - De-arrangement 
+        - Binomial Coeffecient
+        - Catalan Number
       * [Number Therory](#number_theory)
+        - Primes (Sieve Method)
+        - Euler Totient
 * [Data Structure](#ds)
    * [Segment Tree](#segment_tree)
    * [Binary Indexed Tree](#bit)
@@ -18,11 +23,90 @@
 ____
 ## <b name="dp">Dynamic Programming</b>
 
-<a name="knapsack">Knapsack</a>
+#### <a name="knapsack">Knapsack</a>
 
 ## <b name="coding">Data Structures</b>
 
-<a name="pbds">Policy-Based Data Structure</a>
+#### <a name="segment">Segment Tree</a>
+
+- Do point and range update in an array (adding k to each number between *l-r*  etc.) in *O(logn)*
+- Get range query (Sum of all numbers between *l-r*) in *O(logn)*
+- Building the tree is not always required (Note that building the whole tree at first requires *O(nlogn)*)
+
+```c++
+
+#define MAX_SIZE 1000002
+
+int arr[MAX_SIZE];
+int tree[MAX_SIZE*3];
+int lazy[MAX_SIZE*3];
+
+void build(int node,int b,int e)
+{
+    if(b==e){
+        tree[node]=arr[b];
+        return;
+    }
+    int mid=(b+e)/2;
+    build(node*2,b,mid);
+    build(node*2+1,mid+1,e);
+    tree[node]=tree[node*2]+tree[node*2+1];
+}
+
+void update(int node,int b,int e,int l,int r,int val)
+{
+    if(lazy[node]!=0){
+        tree[node]+=(e-b+1)*lazy[node];
+        if(b!=e){
+            lazy[node*2]+=lazy[node];
+            lazy[node*2+1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+    if(b>e || b>r || e<l){
+        return;
+    }
+    if(b>=l && e<=r){
+        tree[node]+=(e-b+1)*val;
+        if(b!=e){
+            lazy[node*2]+=val;
+            lazy[node*2+1]+=val;
+        }
+        return;
+    }
+    int mid=(b+e)/2;
+    update(node*2,b,mid,l,r,val);
+    update(node*2+1,mid+1,e,l,r,val);
+    tree[node]=tree[node*2]+tree[node*2+1];
+}
+
+ll query(int node,int b,int e,int l,int r)
+{
+    if(b>e || b>r || e<l){
+        return 0;
+    }
+    if(lazy[node]!=0){
+        tree[node]+=(e-b+1)*lazy[node];
+        if(b!=e){
+            lazy[node*2]+=lazy[node];
+            lazy[node*2+1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+    if(b>=l && e<=r){
+        return tree[node];
+    }
+    int mid=(b+e)/2;
+    int p1=query(node*2,b,mid,l,r);
+    int p2=query(node*2+1,mid+1,e,l,r);
+    return (p1+p2);
+}
+
+```
+
+
+
+#### <a name="pbds">Policy-Based Data Structure</a>
 
 Following modules need to be included to use PBDS.
 
