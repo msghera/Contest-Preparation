@@ -3,6 +3,7 @@
 *Prepared (Ongoing) by Mohammad Sheikh Ghazanfar, Machine Learning R&D, Nascenia*
 
 * [Dynamic Programming](#dp)
+   
    * [Knapsack](#knapsack)
 * [Math](#math)
   * [Couning](#counting)
@@ -117,6 +118,8 @@ Following modules need to be included to use PBDS.
 using namespace __gnu_pbds;
 typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 ```
+
+- Instead of using as *Set* it can be used as a *Multiset*. For that instead of using **less**, **less_equal** is needed.
 
 It works as a set but elements at the i-th position can be fetch using **find_by_operation(index)** and numbers strictly less than a given number k can be found by **order_of_key(k)**.
 
