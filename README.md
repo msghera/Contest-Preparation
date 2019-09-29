@@ -22,7 +22,7 @@
    
 * [Graph](#graph)
 
-   * [Union Find](union_find)
+   * [Union Find](#union_find)
 
 * [My template](#template)
 ____
@@ -157,30 +157,33 @@ It works as a set but elements at the i-th position can be fetch using **find_by
 - Make_Set function is required to be called which will work as a constructor.
 
 ```c++
+
 #define MAX_SIZE 100002
-int parent[MAX_SIZE], _rank[MAX_SIZE];
 
-void Make_Set(int x){
-    f(i,0,x+1){
-        parent[i] = i;
-         _rank[i] = 0;
+struct UF{
+    int parent[MAX_SIZE], _rank[MAX_SIZE];
+    UF(int x = MAX_SIZE){
+        f(i,0,x+1){
+            parent[i] = i;
+             _rank[i] = 0;
+        }
     }
-}
 
-int Find(int x){
-    if(parent[x] != x) parent[x] = Find(parent[x]);
-    return parent[x];
-}
-
-void Union(int x, int y){
-    int PX = Find(x),PY = Find(y);
-
-    if(_rank[PX] > _rank[PY]) parent[PY] = PX;
-    else{
-        parent[PX] = PY;
-        if(_rank[PX]==_rank[PY]) ++_rank[PY];
+    int Find(int x){
+        if(parent[x] != x) parent[x] = Find(parent[x]);
+        return parent[x];
     }
-}
+
+    void Union(int x, int y){
+        int PX = Find(x),PY = Find(y);
+
+        if(_rank[PX] > _rank[PY]) parent[PY] = PX;
+        else{
+            parent[PX] = PY;
+            if(_rank[PX]==_rank[PY]) ++_rank[PY];
+        }
+    }
+};
 ```
 
 
