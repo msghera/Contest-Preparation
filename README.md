@@ -5,6 +5,7 @@
 * [Dynamic Programming](#dp)
    
    * [Knapsack](#knapsack)
+   
 * [Math](#math)
   * [Couning](#counting)
     - De-arrangement 
@@ -13,11 +14,16 @@
   - [Number Therory](#number_theory)
       * Primes (Sieve Method)
       * Euler Totient
+  
 * [Data Structure](#ds)
    * [Segment Tree](#segment_tree)
    * [Binary Indexed Tree](#bit)
    * [Policy-Based Data Structure](#pbds)
+   
 * [Graph](#graph)
+
+   * [Union Find](union_find)
+
 * [My template](#template)
 ____
 ## <b name="dp">Dynamic Programming</b>
@@ -140,6 +146,41 @@ It works as a set but elements at the i-th position can be fetch using **find_by
     cout<<X.order_of_key(3)<<endl;   // 2
     cout<<X.order_of_key(4)<<endl;   // 2
     cout<<X.order_of_key(400)<<endl; // 5
+```
+
+## <b name="graph">Graph</b>
+
+#### <a name="union_find">Union Find</a>
+
+- Also called as Disjoint Set (Union)
+- Make union of all the nodes in overall *O(n)* runtime.
+- Make_Set function is required to be called which will work as a constructor.
+
+```c++
+#define MAX_SIZE 100002
+int parent[MAX_SIZE], _rank[MAX_SIZE];
+
+void Make_Set(int x){
+    f(i,0,x+1){
+        parent[i] = i;
+         _rank[i] = 0;
+    }
+}
+
+int Find(int x){
+    if(parent[x] != x) parent[x] = Find(parent[x]);
+    return parent[x];
+}
+
+void Union(int x, int y){
+    int PX = Find(x),PY = Find(y);
+
+    if(_rank[PX] > _rank[PY]) parent[PY] = PX;
+    else{
+        parent[PX] = PY;
+        if(_rank[PX]==_rank[PY]) ++_rank[PY];
+    }
+}
 ```
 
 
