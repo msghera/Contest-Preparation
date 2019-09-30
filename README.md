@@ -3,10 +3,11 @@
 *Prepared (Ongoing) by Mohammad Sheikh Ghazanfar, Machine Learning R&D, Nascenia*
 
 * [Dynamic Programming](#dp)
-   
+  
    * [Knapsack](#knapsack)
    
 * [Math](#math)
+  
   * [Couning](#counting)
     - De-arrangement 
     - Binomial Coefficient
@@ -14,8 +15,10 @@
   - [Number Therory](#number_theory)
       * Primes (Sieve Method)
       * [Euler Totient](#euler_totient)
+      * [Modular Inverse](#modular_inverse)
   
 * [Data Structure](#ds)
+   
    * [Segment Tree](#segment_tree)
    * [Binary Indexed Tree](#bit)
    * [Policy-Based Data Structure](#pbds)
@@ -24,11 +27,67 @@
 
    * [Union Find](#union_find)
 
+* [String](#string)
+
+   - [Hashing](#hashing)
+
 * [My template](#template)
 ____
 ## <b name="dp">Dynamic Programming</b>
 
 #### <a name="knapsack">Knapsack</a>
+
+## <b name="math">Math</b>
+
+<b name="number_theory">Number Theory</b>
+
+#### <a name="euler_totient">Euler Totient</a>
+
+- Also know as *phi* or *φ*.
+- *φ(n)* Denotes the number of integers less than n which are co-prime with that number. Such that, count number of *i* for *1 ≤i < n* and *gcd(i, n) = 1*.
+- Number of integer such that *gcd(i, n) = k* is equal to φ(n/k)
+
+```c++
+#define MAX_SIZE 10000002
+
+int phi[MAX_SIZE];
+
+void computeTotient(int n){
+    for (int i=1; i<=n; i++) phi[i] = i;
+    for (int p=2; p<=n; p++){
+        if (phi[p] == p){
+            phi[p] = p-1;
+            for (int i = 2*p; i<=n; i += p) phi[i] = (phi[i]/p) * (p-1);
+        }
+    }
+}
+```
+
+
+
+<a name="modular_inverse">Modular Inverse</a>
+
+```
+a x ≡ 1 (mod m) 
+```
+
+Let m is a prime and a is sum number. Finding x for the above function is called *modular inverse*. It can easily be find as *pow(a, m-2, m)*. Now, to pre-calculate for all a following code is required. Note that, Time and Space both complexity is *O(n)*.
+
+```c++
+#define MAX_SIZE 100002
+
+ll INV[MAX_SIZE];
+void calculate_inv(ll m = 1e9+7) {
+    INV[1] = 1;
+    int n = MAX_SIZE;
+    for ( int i = 2; i <= n; i++ ) {
+        INV[i] = (-(m/i) * INV[m%i] ) % m;
+        INV[i] = INV[i] + m;
+    }
+}
+```
+
+
 
 ## <b name="coding">Data Structures</b>
 
@@ -186,28 +245,63 @@ struct UF{
 };
 ```
 
-## <b name="number_theory">Number Theory</b>
 
-#### <a name="union_find">Euler Totient</a>
 
-- Also know as *phi* or *φ*.
-- *φ(n)* Denotes the number of integers less than n which are co-prime with that number. Such that, count number of *i* for *1 ≤i < n* and *gcd(i, n) = 1*.
-- Number of integer such that *gcd(i, n) = k* is equal to φ(n/k)
+## <b name="string">String</b>
+
+#### <a name="hashing">Hashing</a>
+
+- Base and Modulo should be as random as possible. Also prime should be big.
+- Struct calculate as soon as it's called. Overall complexity is *O(n)*.
+- Function *range_hash* returns hash_value in a certain range in *O(1)*. Likely, to be required for the Text.
+- Function *full_hash* return hash_value of the full string in *O(1)*. Likely, to be required for the Pattern.
 
 ```c++
-#define MAX_SIZE 10000002
+#define MAX_SIZE 100002
 
-int phi[MAX_SIZE];
+struct Hash{
+    ll p, m, hash_value[MAX_SIZE], power[MAX_SIZE];
+    st str;
+    Hash(st _str){
+        p = 31, m = 1e9+3;
+        // p = 27 , 13 , 11, 29 are candidate
+        // m = 1e9+7, 1e9+9 are candidate
+        str = _str;
+        calculate_hash();
+        power[0]=1;
+        for(int i = 1 ; i<str.size(); i++) power[i] = (power[i-1] * p) % m;
+    }
 
-void computeTotient(int n){
-    for (int i=1; i<=n; i++) phi[i] = i;
-    for (int p=2; p<=n; p++){
-        if (phi[p] == p){
-            phi[p] = p-1;
-            for (int i = 2*p; i<=n; i += p) phi[i] = (phi[i]/p) * (p-1);
+    int to_int(char ch){
+        return ch - 'a' + 1; // smallest possible character is needed to be mentioned here
+    }
+
+    void print(){
+        for(int i=0; i<min((int)str.size(), 20); i++) cout<<i<<" : "<<hash_value[i]<<endl;
+        // only required for debug purpose
+    }
+
+    void calculate_hash(){
+        hash_value[0] = to_int(str[0]);
+        for(int i = 1 ; i<str.size(); i++){
+            hash_value[i] = (hash_value[i-1] * p) + to_int(str[i]);
+            hash_value[i] %= m;
         }
     }
-}
+
+    ll range_hash(int l, int r){
+        if (l==0) return hash_value[r];
+        else{
+            ll temp = hash_value[r] - (hash_value[l-1] * power[r-l+1])%m;
+            if (temp < 0) temp+=m;
+            return temp;
+        }
+    }
+
+    ll full_hash(){
+        return hash_value[str.size()-1];
+    }
+};
 ```
 
 
