@@ -17,6 +17,7 @@
       * [Euler Totient](#euler_totient)
       * [Modular Inverse](#modular_inverse)
       * [Lucas Theorem](#lucas)
+      * [GCD Sum](#gcd_sum)
 
 * [Data Structure](#ds)
 
@@ -94,6 +95,12 @@ void calculate_inv(ll m = 1e9+7) {
 #### <a name="lucas">Lucas Theorem</a>
 
 ![Lucas Theorem](lucas.png)
+
+#### <a name="gcd_sum">GCD Sum</a>
+
+
+
+![GCD Sum](gcd_sum.png)
 
 ## <b name="coding">Data Structures</b>
 
