@@ -7,7 +7,7 @@
    * [Knapsack](#knapsack)
    
 * [Math](#math)
-  
+
   * [Couning](#counting)
     - De-arrangement 
     - Binomial Coefficient
@@ -16,7 +16,8 @@
       * Primes (Sieve Method)
       * [Euler Totient](#euler_totient)
       * [Modular Inverse](#modular_inverse)
-  
+      * [Lucas Theorem](#lucas)
+
 * [Data Structure](#ds)
 
    * [Segment Tree](#segment_tree)
@@ -66,7 +67,7 @@ void computeTotient(int n){
 
 
 
-<a name="modular_inverse">Modular Inverse</a>
+#### <a name="modular_inverse">Modular Inverse</a>
 
 ```
 a x ≡ 1 (mod m) 
@@ -89,6 +90,10 @@ void calculate_inv(ll m = 1e9+7) {
 ```
 
 
+
+#### <a name="lucas">Lucas Theorem</a>
+
+![lucas.png]()
 
 ## <b name="coding">Data Structures</b>
 
@@ -210,7 +215,7 @@ It works as a set but elements at the i-th position can be fetch using **find_by
 
 
 
-#### <a name="pbds">Mo's Algorithm</a>
+#### <a name="mos">Mo's Algorithm</a>
 
 - This is a off line query processing technique with an overall complexity *O(Q√N)*.
 
