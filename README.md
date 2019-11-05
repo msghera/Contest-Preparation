@@ -41,7 +41,7 @@ ____
 
 ## <b name="math">Math</b>
 
-<b name="number_theory">Number Theory</b>
+### <a name="number_theory">Number Theory</a>
 
 #### <a name="euler_totient">Euler Totient</a>
 
@@ -93,7 +93,7 @@ void calculate_inv(ll m = 1e9+7) {
 
 #### <a name="lucas">Lucas Theorem</a>
 
-![lucas.png]()
+![Lucas Theorem](lucas.png)
 
 ## <b name="coding">Data Structures</b>
 
