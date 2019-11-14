@@ -4,7 +4,7 @@
 
 * [Dynamic Programming](#dp)
   
-   * [Knapsack](#knapsack)
+   * [Digit DP](#digit_dp)
    
 * [Math](#math)
 
@@ -34,11 +34,48 @@
 
    - [Hashing](#hashing)
 
-* [My template](#template)
+* [Miscellaneous](#miscellaneous)
+
+   * [My template](#template)
+   * [Custom Comapre](#custom_compare)
 ____
 ## <b name="dp">Dynamic Programming</b>
 
-#### <a name="knapsack">Knapsack</a>
+#### <a name="digit_dp">Digit DP</a>
+
+Sometimes we need to find in a certain range *a* to *b* that how many times a certain attribute occurs such that how time 0 (zero) occurs. Known as **Digit DP**.
+
+```c++
+ll dp[24][24][2][2];
+vi num;
+ 
+ll call(int i, int coun, bool isSmall, bool isStart){
+    if(i==num.size()) return coun;
+    if(dp[i][coun][isSmall][isStart]!=unvisited) return dp[i][coun][isSmall][isStart];
+    ll ret=0, lim=10;
+    if(!isSmall) lim=num[i]+1;
+    if(isStart){
+        f(j,1,lim) ret+=call(i+1, coun, isSmall | j<num[i], 0);
+        ret+=call(i+1, 0, 1, 1);
+    }
+    else f(j,0,lim) ret+=call(i+1, coun+(j==0), isSmall | j<num[i] , 0);
+    return dp[i][coun][isSmall][isStart]=ret;
+}
+ 
+ll func(ll n){
+    if(n<0) return 0;
+    else if(n<10) return 1;
+    num.clear();
+    mem(dp, unvisited);
+    while(n){num.pb(n%10); n/=10;}
+    reverse(all(num));
+   // deb(num);
+    return call(0,0,0,1)+1;
+}
+ 
+```
+
+
 
 ## <b name="math">Math</b>
 
@@ -375,7 +412,22 @@ struct Hash{
 
 
 
-## <b name="template">My Template</b>
+## <b name="miscellaneous">Miscellaneous</b>
+
+#### <a name="custom_compare">Custom Compare</a>
+
+Using this function in sort with sort vector of pairs in such a way first is smaller and if both are same then second is smaller. Thus changing the sign we can fill our need.
+
+```c++
+bool cmp(const pair<int,int> &a,const pair<int,int> &b) { 
+	if (a.first != b.first) return a.first < b.first;
+	return a.second < b.second;
+}
+```
+
+
+
+#### <a name="template">My Template</a>
 
 ```c++
 /*
