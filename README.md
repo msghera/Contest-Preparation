@@ -3,9 +3,10 @@
 *Prepared (Ongoing) by Mohammad Sheikh Ghazanfar, Machine Learning R&D, Nascenia*
 
 * [Dynamic Programming](#dp)
-  
+
    * [Digit DP](#digit_dp)
-   
+   * [Digit DP](#digit_dp)
+
 * [Math](#math)
 
   * [Couning](#counting)
@@ -40,6 +41,18 @@
    * [Custom Comapre](#custom_compare)
 ____
 ## <b name="dp">Dynamic Programming</b>
+
+#### <a name="bitmask_dp">Bitmask DP</a>
+
+Main 3 functions that are used in Bit mask DP, that are required for masking manipulation.
+
+```c++
+int Set(int N,int pos){return N=N | (1<<pos);}
+int reset(int N,int pos){return N= N & ~(1<<pos);}
+bool check(int N,int pos){return (bool)(N & (1<<pos));}
+```
+
+
 
 #### <a name="digit_dp">Digit DP</a>
 
